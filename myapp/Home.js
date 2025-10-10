@@ -1,9 +1,10 @@
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, StyleSheet } from 'react-native';
+import { globalStyles } from './styles';
 
 export default function Home({ navigation }) {
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Home Screen</Text>
+        <View style={globalStyles.container}>
+            <Text style={globalStyles.titleText}>Welcome to your outfit roulette!</Text>
             <Button 
                 title="Go to Outfit" 
                 onPress={() => navigation.navigate('Outfit')} 
@@ -11,3 +12,4 @@ export default function Home({ navigation }) {
         </View>
     );
 }
+

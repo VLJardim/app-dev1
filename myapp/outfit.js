@@ -1,9 +1,11 @@
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native';
+import { globalStyles } from './styles';
 
 export default function Outfit() {
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Here's a suggestion to today's outfit!</Text>
+        <View style={globalStyles.container}>
+            <Text style={globalStyles.titleText}>Here's a suggestion to today's outfit!</Text>
         </View>
     );
 }
+
