@@ -1,6 +1,7 @@
 // src/context/WeatherContext.js
 import React, { createContext, useState, useContext, useEffect } from "react";
-import { getWeatherData } from "../services/weatherApi";
+import { getWeatherData } from "../api/weatherService";
+
 
 const WeatherContext = createContext();
 

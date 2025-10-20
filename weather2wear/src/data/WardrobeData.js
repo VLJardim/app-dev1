@@ -11,14 +11,14 @@ export const wardrobeData = [
     id: 1,
     category: "Outerwear",
     name: "Denim Jacket",
-    image: require("../../assets/dummy/jacket1.png"),
+    image: null,
     weatherType: "mild", // mild weather
   },
   {
     id: 2,
     category: "Outerwear",
     name: "Winter Coat",
-    image: require("../../assets/dummy/jacket2.png"),
+    image: null,
     weatherType: "cold",
   },
 
@@ -27,14 +27,14 @@ export const wardrobeData = [
     id: 3,
     category: "Top",
     name: "White T-Shirt",
-    image: require("../../assets/dummy/top1.png"),
+    image: null,
     weatherType: "warm",
   },
   {
     id: 4,
     category: "Top",
     name: "Sweatshirt",
-    image: require("../../assets/dummy/top2.png"),
+    image: null,
     weatherType: "cold",
   },
 
@@ -43,14 +43,14 @@ export const wardrobeData = [
     id: 5,
     category: "Bottom",
     name: "Jeans",
-    image: require("../../assets/dummy/bottom1.png"),
+    image: null,
     weatherType: "mild",
   },
   {
     id: 6,
     category: "Bottom",
     name: "Shorts",
-    image: require("../../assets/dummy/bottom2.png"),
+    image: null,
     weatherType: "warm",
   },
 
@@ -59,14 +59,14 @@ export const wardrobeData = [
     id: 7,
     category: "Shoes",
     name: "Sneakers",
-    image: require("../../assets/dummy/shoes1.png"),
+    image: null,
     weatherType: "mild",
   },
   {
     id: 8,
     category: "Shoes",
     name: "Boots",
-    image: require("../../assets/dummy/shoes2.png"),
+    image: null,
     weatherType: "cold",
   },
 ];

@@ -10,10 +10,10 @@ const WardrobeContext = createContext();
 export const WardrobeProvider = ({ children }) => {
   // Hardcoded clothing items for MVP (can later be user-uploaded)
   const [clothing, setClothing] = useState([
-    { id: 1, category: "Top", image: require("../../assets/dummy/top1.png") },
-    { id: 2, category: "Bottom", image: require("../../assets/dummy/bottom1.png") },
-    { id: 3, category: "Shoes", image: require("../../assets/dummy/shoes1.png") },
-    { id: 4, category: "Jacket", image: require("../../assets/dummy/jacket1.png") },
+    { id: 1, category: "Top", image: null},
+    { id: 2, category: "Bottom", image: null},
+    { id: 3, category: "Shoes", image: null},
+    { id: 4, category: "Jacket", image: null}
   ]);
 
   const [currentOutfit, setCurrentOutfit] = useState(null);
