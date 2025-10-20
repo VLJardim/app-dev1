@@ -1,4 +1,3 @@
-// src/screens/AddClothingScreen.js
 import React, { useState } from "react";
 import { View, TextInput, Button, Image, StyleSheet } from "react-native";
 import ScreenWrapper from "../components/Layout/ScreenWrapper";

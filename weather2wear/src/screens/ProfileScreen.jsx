@@ -1,10 +1,9 @@
-// src/screens/ProfileScreen.js
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import ScreenWrapper from "../components/Layout/ScreenWrapper";
 import Header from "../components/Layout/Header";
 
-const ProfileScreen = () => {
+const ProfileScreen = ({ navigation }) => {
   return (
     <ScreenWrapper>
       <Header title="My Profile" />

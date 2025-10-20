@@ -1,4 +1,3 @@
-// src/screens/OutfitScreen.js
 import React from "react";
 import { View, Text, Image, StyleSheet, Button } from "react-native";
 import ScreenWrapper from "../components/Layout/ScreenWrapper";

@@ -1,11 +1,10 @@
-// src/screens/WeatherScreen.js
 import React from "react";
 import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
 import ScreenWrapper from "../components/Layout/ScreenWrapper";
 import Header from "../components/Layout/Header";
 import { useWeather } from "../context/WeatherContext";
 
-const WeatherScreen = () => {
+const WeatherScreen = ({ navigation }) => {
   const { weather, loading, error } = useWeather();
 
   return (

@@ -1,4 +1,3 @@
-// src/screens/HomeScreen.js
 import React from "react";
 import { View, Text, Button, StyleSheet, ActivityIndicator } from "react-native";
 import ScreenWrapper from "../components/Layout/ScreenWrapper";

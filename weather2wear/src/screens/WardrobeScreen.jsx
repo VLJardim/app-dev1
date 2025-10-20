@@ -1,4 +1,3 @@
-// src/screens/WardrobeScreen.js
 import React from "react";
 import { FlatList, View, Text, StyleSheet } from "react-native";
 import ScreenWrapper from "../components/Layout/ScreenWrapper";
