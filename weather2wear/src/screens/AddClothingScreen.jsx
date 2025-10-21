@@ -1,30 +1,26 @@
 import React, { useState } from "react";
-import { View, TextInput, Button, Image, StyleSheet } from "react-native";
+import { View, TextInput, Button, StyleSheet, Text } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import ScreenWrapper from "../components/Layout/ScreenWrapper";
-import { useImagePicker } from "../hooks/useImagePicker";
-import { useWardrobe } from "../context/WardrobeContext";
 
-const AddClothingScreen = ({ navigation }) => {
-  const { image, pickImageFromGallery, captureImageWithCamera } = useImagePicker();
-  const { addClothingItem } = useWardrobe();
+export default function AddClothingScreen() {
+  const navigation = useNavigation();
   const [category, setCategory] = useState("");
 
   const handleAdd = () => {
-    if (!image || !category) {
-      alert("Please select an image and category!");
+    if (!category) {
+      alert("Please enter a category!");
       return;
     }
 
-    addClothingItem({ image: { uri: image }, category });
+    alert(`Added ${category} to wardrobe!`);
     navigation.goBack();
   };
 
   return (
     <ScreenWrapper>
       <View style={styles.container}>
-        <Button title="Take Photo" onPress={captureImageWithCamera} />
-        <Button title="Choose from Gallery" onPress={pickImageFromGallery} />
-        {image && <Image source={{ uri: image }} style={styles.preview} />}
+        <Text style={styles.title}>Add Clothing</Text>
 
         <TextInput
           style={styles.input}
@@ -37,20 +33,19 @@ const AddClothingScreen = ({ navigation }) => {
       </View>
     </ScreenWrapper>
   );
-};
-
-export default AddClothingScreen;
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
+    padding: 20,
     gap: 20,
   },
-  preview: {
-    width: 200,
-    height: 200,
-    alignSelf: "center",
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
   },
   input: {
     borderWidth: 1,

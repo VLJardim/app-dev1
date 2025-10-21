@@ -1,43 +1,25 @@
 import React from "react";
-import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
-import ScreenWrapper from "../components/Layout/ScreenWrapper";
-import Header from "../components/Layout/Header";
-import { useWeather } from "../context/WeatherContext";
+import { View, Text, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-const WeatherScreen = ({ navigation }) => {
-  const { weather, loading, error } = useWeather();
+export default function WeatherScreen() {
+  const navigation = useNavigation();
 
   return (
-    <ScreenWrapper>
-      <Header title="Weather" />
-      <View style={styles.container}>
-        {loading && <ActivityIndicator size="large" color="#000" />}
-        {error && <Text>{error}</Text>}
-        {weather && (
-          <>
-            <Text style={styles.city}>{weather.name}</Text>
-            <Text style={styles.temp}>{Math.round(weather.main.temp)}°C</Text>
-            <Text>{weather.weather[0].description}</Text>
-          </>
-        )}
-      </View>
-    </ScreenWrapper>
+    <View style={styles.container}>
+      <Text style={styles.title}>Weather Screen</Text>
+    </View>
   );
-};
-
-export default WeatherScreen;
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
     justifyContent: "center",
+    alignItems: "center",
   },
-  city: {
+  title: {
     fontSize: 24,
     fontWeight: "bold",
-  },
-  temp: {
-    fontSize: 50,
   },
 });

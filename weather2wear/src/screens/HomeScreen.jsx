@@ -1,33 +1,20 @@
 import React from "react";
-import { View, Text, Button, StyleSheet, ActivityIndicator } from "react-native";
-import ScreenWrapper from "../components/Layout/ScreenWrapper";
-import Header from "../components/Layout/Header";
-import RouletteDisplay from "../components/Layout/RouletteDisplay";
-import { useRoulette } from "../hooks/useRoulette";
+import { View, Text, Button, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-const HomeScreen = ({ navigation }) => {
-  const { spinRoulette, isSpinning, currentOutfit } = useRoulette();
+export default function HomeScreen() {
+  const navigation = useNavigation();
 
   return (
-    <ScreenWrapper>
-      <Header
-        title="Outfit Roulette"
-        onMenuPress={() => navigation.navigate("Profile")}
-        onAddPress={() => navigation.navigate("AddClothing")}
-      />
-      <View style={styles.container}>
-        {isSpinning ? (
-          <ActivityIndicator size="large" color="#000" />
-        ) : (
-          <RouletteDisplay outfit={currentOutfit} />
-        )}
-        <Button title="🎡 Spin the Wheel" onPress={spinRoulette} />
-      </View>
-    </ScreenWrapper>
+    <View style={styles.container}>
+      <Text style={styles.title}>Home Screen</Text>
+      <Button title="Go to Weather" onPress={() => navigation.navigate("Weather")} />
+      <Button title="Go to Wardrobe" onPress={() => navigation.navigate("Wardrobe")} />
+      <Button title="Add Clothing" onPress={() => navigation.navigate("Add Clothing")} />
+      <Button title="Go to Profile" onPress={() => navigation.navigate("Profile")} />
+    </View>
   );
-};
-
-export default HomeScreen;
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -35,5 +22,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     gap: 20,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
   },
 });
