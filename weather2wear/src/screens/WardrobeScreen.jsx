@@ -1,42 +1,57 @@
 import React from "react";
-import { FlatList, View, Text, StyleSheet } from "react-native";
-import ScreenWrapper from "../components/Layout/ScreenWrapper";
-import Header from "../components/Layout/Header";
-import ClothingCard from "../components/Layout/ClothingCard";
-import { useWardrobe } from "../context/WardrobeContext";
+import { View, Text, ScrollView } from "react-native";
 
-const WardrobeScreen = ({ navigation }) => {
-  const { clothing } = useWardrobe();
+//  Importing our reusable components
+import ScreenWrapper from "../components/Layout/ScreenWrapper";
+import ProfileCard from "../components/ProfileCard";
+import FilterBar from "../components/FilterBar";
+import ClothingCard from "../components/Layout/ClothingCard";
+
+// (Later) we’ll import useContext to get clothing data
+// import { WardrobeContext } from "../context/WardrobeContext";
+
+const WardrobeScreen = () => {
+  // Later this will come from context
+  // const { wardrobeItems } = useContext(WardrobeContext);
+
+  // Temporary placeholder data to visualize layout
+  const wardrobeItems = [1, 2, 3, 4, 5, 6, 7, 8];
 
   return (
     <ScreenWrapper>
-      <Header title="My Wardrobe" onAddPress={() => navigation.navigate("AddClothing")} />
-      <FlatList
-        data={clothing}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => <ClothingCard item={item} />}
-        numColumns={3}
-        contentContainerStyle={styles.list}
-      />
-      {clothing.length === 0 && (
-        <View style={styles.empty}>
-          <Text>No clothing added yet!</Text>
+      {/*  1. App Name / Header */}
+      <View>
+        <Text style={{ fontSize: 24, fontWeight: "bold", textAlign: "center" }}>
+          Weather2Wear
+        </Text>
+      </View>
+
+      {/*  2. Profile Section */}
+      <View style={{ marginVertical: 10 }}>
+        <ProfileCard />
+      </View>
+
+      {/*  3. Filter Bar (Favorites + Categories) */}
+      <View style={{ marginVertical: 10 }}>
+        <FilterBar />
+      </View>
+
+      {/*  4. Clothing Grid/List */}
+      <ScrollView contentContainerStyle={{ paddingBottom: 20 }}>
+        <View
+          style={{
+            flexDirection: "row",
+            flexWrap: "wrap",
+            justifyContent: "space-between",
+          }}
+        >
+          {wardrobeItems.map((item, index) => (
+            <ClothingCard key={index} />
+          ))}
         </View>
-      )}
+      </ScrollView>
     </ScreenWrapper>
   );
 };
 
 export default WardrobeScreen;
-
-const styles = StyleSheet.create({
-  list: {
-    justifyContent: "center",
-    paddingVertical: 10,
-  },
-  empty: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
