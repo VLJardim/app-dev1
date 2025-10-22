@@ -1,43 +1,41 @@
-// ================================
-// 📄 screens/WardrobeScreen.jsx
-// ================================
-
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import { View, Text, ScrollView, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-// 🧩 Reusable layout components
+// components
 import ScreenWrapper from "../components/Layout/ScreenWrapper";
 import ProfileCard from "../components/ProfileCard";
 import FilterBar from "../components/FilterBar";
 import ClothingCard from "../components/Layout/ClothingCard";
 
-// (Later) wardrobe data will come from context
-// import { WardrobeContext } from "../context/WardrobeContext";
-
 const WardrobeScreen = () => {
-  // Temporary placeholder items to visualize layout
+  const navigation = useNavigation();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: "Weather2Wear", // 👈 sets the header title dynamically
+      headerTilteAlign: "center",
+    });
+  }, [navigation]);
+
   const wardrobeItems = [1, 2, 3, 4, 5, 6, 7, 8];
 
   return (
     <ScreenWrapper>
-      {/* ===== 1️⃣ App Header ===== */}
       <View>
-        <Text style={styles.headerText}>Weather2Wear</Text>
+        <Text style={styles.header}>Wardrobe</Text>
       </View>
 
-      {/* ===== 2️⃣ Profile Section ===== */}
-      <View style={styles.section}>
+      <View style={{ marginVertical: 10 }}>
         <ProfileCard />
       </View>
 
-      {/* ===== 3️⃣ Filter Bar ===== */}
-      <View style={styles.section}>
+      <View style={{ marginVertical: 10 }}>
         <FilterBar />
       </View>
 
-      {/* ===== 4️⃣ Clothing Grid/List ===== */}
       <ScrollView contentContainerStyle={{ paddingBottom: 20 }}>
-        <View style={styles.clothingGrid}>
+        <View style={styles.grid}>
           {wardrobeItems.map((item, index) => (
             <ClothingCard key={index} />
           ))}
@@ -47,29 +45,17 @@ const WardrobeScreen = () => {
   );
 };
 
-// ================================
-// 💅 Styles
-// ================================
+export default WardrobeScreen;  // 👈 MUST be here, not inside the component
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  headerText: {
+  header: {
     fontSize: 24,
     fontWeight: "bold",
     textAlign: "center",
   },
-  section: {
-    marginVertical: 10,
-  },
-  clothingGrid: {
+  grid: {
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
   },
 });
-
-// ✅ Export must stay default (important for navigation)
-export default WardrobeScreen;
