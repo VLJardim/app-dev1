@@ -1,50 +1,43 @@
-import React from "react";
-import { View, Text, ScrollView } from "react-native";
+// ================================
+// 📄 screens/WardrobeScreen.jsx
+// ================================
 
-//  Importing our reusable components
+import React from "react";
+import { View, Text, ScrollView, StyleSheet } from "react-native";
+
+// 🧩 Reusable layout components
 import ScreenWrapper from "../components/Layout/ScreenWrapper";
 import ProfileCard from "../components/ProfileCard";
 import FilterBar from "../components/FilterBar";
 import ClothingCard from "../components/Layout/ClothingCard";
 
-// (Later) we’ll import useContext to get clothing data
+// (Later) wardrobe data will come from context
 // import { WardrobeContext } from "../context/WardrobeContext";
 
 const WardrobeScreen = () => {
-  // Later this will come from context
-  // const { wardrobeItems } = useContext(WardrobeContext);
-
-  // Temporary placeholder data to visualize layout
+  // Temporary placeholder items to visualize layout
   const wardrobeItems = [1, 2, 3, 4, 5, 6, 7, 8];
 
   return (
     <ScreenWrapper>
-      {/*  1. App Name / Header */}
+      {/* ===== 1️⃣ App Header ===== */}
       <View>
-        <Text style={{ fontSize: 24, fontWeight: "bold", textAlign: "center" }}>
-          Weather2Wear
-        </Text>
+        <Text style={styles.headerText}>Weather2Wear</Text>
       </View>
 
-      {/*  2. Profile Section */}
-      <View style={{ marginVertical: 10 }}>
+      {/* ===== 2️⃣ Profile Section ===== */}
+      <View style={styles.section}>
         <ProfileCard />
       </View>
 
-      {/*  3. Filter Bar (Favorites + Categories) */}
-      <View style={{ marginVertical: 10 }}>
+      {/* ===== 3️⃣ Filter Bar ===== */}
+      <View style={styles.section}>
         <FilterBar />
       </View>
 
-      {/*  4. Clothing Grid/List */}
+      {/* ===== 4️⃣ Clothing Grid/List ===== */}
       <ScrollView contentContainerStyle={{ paddingBottom: 20 }}>
-        <View
-          style={{
-            flexDirection: "row",
-            flexWrap: "wrap",
-            justifyContent: "space-between",
-          }}
-        >
+        <View style={styles.clothingGrid}>
           {wardrobeItems.map((item, index) => (
             <ClothingCard key={index} />
           ))}
@@ -52,16 +45,31 @@ const WardrobeScreen = () => {
       </ScrollView>
     </ScreenWrapper>
   );
-}
+};
 
+// ================================
+// 💅 Styles
+// ================================
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
-  title: {
+  headerText: {
     fontSize: 24,
     fontWeight: "bold",
+    textAlign: "center",
+  },
+  section: {
+    marginVertical: 10,
+  },
+  clothingGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
   },
 });
+
+// ✅ Export must stay default (important for navigation)
+export default WardrobeScreen;
