@@ -1,8 +1,10 @@
 // src/components/Layout/ClothingCard.jsx
 import React from "react";
-import { View, Image, Text, StyleSheet } from "react-native";
+import { View, Image, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { Ionicons } from "@expo/vector-icons"; // ✅ for heart icons
+import { useFavorites } from "../../context/FavoritesContext"; // ✅ hook from context
 
-// ✅ Correct relative path to your placeholders
+// ✅ Local placeholder images for when an item has no image
 const placeholders = [
   require("../../assets-app/images/placeholder1.png"),
   require("../../assets-app/images/placeholder2.png"),
@@ -11,40 +13,40 @@ const placeholders = [
 ];
 
 /**
- * Displays an individual clothing item with its image and category name.
- * If no image is provided, it falls back to a random placeholder.
+ * Displays an individual clothing item with its image, category, and a heart icon for favorites.
  */
-const ClothingCard = ({ item }) => {
-  // Pick a random placeholder (every card gets one if image is missing)
+const ClothingCard = ({ id, imageSource, category }) => {
+  const { favorites, toggleFavorite } = useFavorites(); // ✅ access global favorites
+  const isFavorite = favorites.includes(id); // ✅ check if this item is favorited
+
+  // Pick a random placeholder if the image is missing
   const randomPlaceholder =
     placeholders[Math.floor(Math.random() * placeholders.length)];
 
-  // Handle completely missing item object
-  if (!item) {
-    return (
-      <View style={styles.card}>
-        <Image source={randomPlaceholder} style={styles.image} />
-        <Text style={styles.label}>No Item</Text>
-      </View>
-    );
-  }
-
-  // Determine image source
-  let imageSource = randomPlaceholder;
-  if (item.image) {
-    if (typeof item.image === "string") {
-      imageSource = { uri: item.image }; // ✅ URL case
-    } else {
-      imageSource = item.image; // ✅ local require() case
-    }
-  }
+  // Decide which image to show
+  const image =
+    imageSource ||
+    randomPlaceholder; // fallback if no imageSource provided
 
   return (
     <View style={styles.card}>
-      <Image source={imageSource} style={styles.image} />
-      <Text style={styles.label}>
-        {item.category ? item.category : "Unknown"}
-      </Text>
+      {/* ❤️ Heart icon positioned top-right */}
+      <TouchableOpacity
+        style={styles.heartIcon}
+        onPress={() => toggleFavorite(id)} // ✅ toggles favorite status
+      >
+        <Ionicons
+          name={isFavorite ? "heart" : "heart-outline"}
+          size={20}
+          color={isFavorite ? "red" : "gray"}
+        />
+      </TouchableOpacity>
+
+      {/* 🖼️ Item image */}
+      <Image source={image} style={styles.image} />
+
+      {/* 🏷️ Label below the image */}
+      <Text style={styles.label}>{category || "No Item"}</Text>
     </View>
   );
 };
@@ -62,6 +64,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.05,
     shadowRadius: 3,
     elevation: 2,
+    position: "relative", // ✅ allows heart icon positioning
   },
   image: {
     width: 80,
@@ -73,5 +76,11 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     fontSize: 14,
     fontWeight: "500",
+  },
+  heartIcon: {
+    position: "absolute", // ✅ makes it float over image
+    top: 6,
+    right: 6,
+    zIndex: 1,
   },
 });
