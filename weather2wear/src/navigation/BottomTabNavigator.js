@@ -1,40 +1,42 @@
 // src/navigation/BottomTabNavigator.js
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Ionicons } from "@expo/vector-icons";
+
 import HomeScreen from "../screens/HomeScreen";
 import WardrobeScreen from "../screens/WardrobeScreen";
-import WeatherScreen from "../screens/WeatherScreen";
-import ProfileScreen from "../screens/ProfileScreen";
-import { Ionicons } from "@expo/vector-icons";
+import AddClothingScreen from "../screens/AddClothingScreen";
 
 const Tab = createBottomTabNavigator();
 
-/**
- * Bottom tab navigation for main sections of the app.
- */
 const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
+      initialRouteName="Home" // 🧭 ensures app opens on Home first
       screenOptions={({ route }) => ({
         headerShown: false,
         tabBarShowLabel: false,
-        tabBarActiveTintColor: "#000",
+        tabBarActiveTintColor: "#8b9a46",
         tabBarInactiveTintColor: "#999",
-        tabBarIcon: ({ color, size }) => {
+        tabBarStyle: {
+          backgroundColor: "#fff",
+          borderTopWidth: 0,
+          elevation: 10,
+          height: 70, // 🧍‍♀️slightly taller for comfort
+        },
+        tabBarIcon: ({ color, size, focused }) => {
           let iconName;
 
           switch (route.name) {
             case "Home":
-              iconName = "home-outline";
+              iconName = focused ? "home" : "home-outline";
               break;
             case "Wardrobe":
-              iconName = "shirt-outline";
+              iconName = focused ? "shirt" : "shirt-outline";
               break;
-            case "Weather":
-              iconName = "cloud-outline";
-              break;
-            case "Profile":
-              iconName = "person-outline";
+            case "AddClothing":
+              iconName = focused ? "add-circle" : "add-circle-outline";
+              size = size + 6; // 📏 make the add icon slightly bigger
               break;
           }
 
@@ -44,8 +46,11 @@ const BottomTabNavigator = () => {
     >
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Wardrobe" component={WardrobeScreen} />
-      <Tab.Screen name="Weather" component={WeatherScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen
+        name="AddClothing"
+        component={AddClothingScreen}
+        options={{ title: "Add Clothing" }}
+      />
     </Tab.Navigator>
   );
 };
